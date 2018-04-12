@@ -59,6 +59,16 @@ encoder_input_data = np.zeros((len(input_texts), max_encoder_seq_length, num_enc
 decoder_input_data = np.zeros((len(input_texts), max_decoder_seq_length, num_decoder_tokens), dytpe='float32')
 decoder_target_data = np.zeros((len(input_texts), max_decoder_seq_length, num_decoder_tokens), dytpe='float32')
 
+for i, (input_text, target_text) in enumerate(zip(input_texts, target_texts)):
+    for t, char in enumerate(input_text):
+        encoder_input_data[i, t, input_token_index[char]] = 1.
+    for t, char in enumerate(target_text):
+        # decoder_target_data is going to be ahead of decoder_input_data by one timestep.
+        decoder_input_data[i, t, target_token_index[char]] = 1.
+        if t > 0:
+            # decoder_target_data is ahead by one timestep and will not include the start character
+            decoder_target_data[i, t - 1, target_token_index[char]] = 1.
+
 
 
 
