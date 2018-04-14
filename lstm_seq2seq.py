@@ -13,6 +13,8 @@ import numpy as np
 import io
 
 batch_size = 64  # Batch size for training
+# For testing
+# epochs = 5
 epochs = 100  # Number of epochs to train for (should change this).
 latent_dim = 256  # Latent dimensionality of the encoding space (what happens if I make this smaller?).
 num_samples = 10000  # Number of samples to train on.
@@ -154,8 +156,8 @@ for seq_index in range(100):
     input_seq = encoder_input_data[seq_index: seq_index + 1]
     decoded_sentence = decode_sequence(input_seq)
     print('-')
-    print('Input sentence: {0}'.format(input_texts[seq_index]))
-    print('Translated sentence: {0}'.format(decoded_sentence))
+    print(u'Input sentence: {0}'.format(input_texts[seq_index]))
+    print(u'Translated sentence: {0}'.format(decoded_sentence))
 
 
 
